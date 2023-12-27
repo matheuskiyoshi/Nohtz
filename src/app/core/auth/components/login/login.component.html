@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="container">
+  <form class="needs-validation pt-3" novalidate [formGroup]="loginForm" (keydown.enter)="login()">
+    <div class="row justify-content-center">
+      <div class="login-container col-sm-8 col-md-5 col-lg-4">
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-bold">Email: </label>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"><i class="bi bi-envelope-fill"></i></span>
+          <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+        </div>
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors" class="text-danger mt-1">
+            <div *ngIf="loginForm.get('email')?.errors?.['required']">Required</div>
+            <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email</div>
+          </div>
+        </div>
+
+        <div class="mb-3 position-relative">
+          <label for="password" class="form-label fw-bold">Password: </label>
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"><i [class]="showPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" (click)="togglePasswordVisibility()"></i></span>
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" placeholder="Password" formControlName="password" [ngClass]="{'is-invalid': submitted}" />
+        </div>
+          <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors" class="text-danger mt-1">
+            <div *ngIf="loginForm.get('password')?.errors?.['required']">Required</div>
+            <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password is too short</div>
+          </div>
+        </div>
+
+        <div class="mb-3 mt-4 d-flex justify-content-center">
+          <button type="submit" class="btn btn-outline-light btn-lg" (click)="login()">Sign In</button>
+        </div>
+
+        <div class="container-link mt-5 text-center d-flex justify-content-end align-items-center">
+          <a class="text-decoration-none" routerLink="/register">Sign Up</a>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="error-message d-flex justify-content-center align-items-center bg-danger mt-4">
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
