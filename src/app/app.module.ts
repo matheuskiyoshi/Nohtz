@@ -7,12 +7,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './core/auth/components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './core/components/not-found/not-found.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HeaderComponent,
+    FooterComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
