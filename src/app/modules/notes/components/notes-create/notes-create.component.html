@@ -1,1 +1,35 @@
-<p>notes-create works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="container-create-note col-sm-8 col-md-5 col-lg-4">
+      <form class="needs-validation pt-3" novalidate [formGroup]="form">
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Note title</label>
+          <input type="text" class="form-control" id="title" placeholder="Note title" formControlName="title"
+            [ngClass]="{ 'is-invalid': submitted }" />
+        </div>
+
+        <div class="mb-3">
+          <label for="body" class="form-label">Note description</label>
+          <textarea class="form-control" placeholder="Describe the note" formControlName="body" id="body"
+            [ngClass]="{ 'is-invalid': submitted }"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Deadline</label>
+          <input type="date" formControlName="deadline" id="date" class="form-control text-col-black">
+        </div>
+
+        <div class="mb-3 d-flex justify-content-end">
+          <button type="submit" class="btn btn-outline-dark me-1" (click)="onCancel()" [routerLink]="['/notes']">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-outline-light" (click)="onSave()" [disabled]="form.invalid">
+            Save
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
