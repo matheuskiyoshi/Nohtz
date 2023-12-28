@@ -1,1 +1,42 @@
-<p>notes-list works!</p>
+<div class="container-date">
+  <h2>{{ currentDate }}</h2>
+</div>
+
+<div class=" d-flex justify-content-between align-items-start pb-2" id="noteLabel">
+  <h3 class="fw-bold">Welcome back, <span id="userName">{{ userName | titlecase}}</span></h3>
+  <div class="searchNote">
+    <input type="text" id="searchNote" class="form-control"  placeholder="Search Note"  (keyup)="onSearch($event)">
+  </div>
+  <div class="newNote">
+    <button type="button" class="btn btn-primary" [routerLink]="['new']">New note</button>
+  </div>
+</div>
+
+<div id="noteContainer">
+  <div *ngFor="let note of notes" class="note">
+    <div class="noteInfo d-flex flex-column justify-content-between">
+      <div class="noteDetails d-flex justify-content-between align-items-center">
+        <h3 class="fw-bold m-0 noteTitle" [class.checked]="note.done"  >{{ note.title }}</h3>
+        <div class="noteCheck">
+          <input type="checkbox" name="noteCheck" class="form-check-input" [checked]="note.done" (change)="toggleCheck(note)">
+        </div>
+      </div>
+      <p class="m-0 noteContent" [class.checked]="note.done">
+        {{ note.body }}
+      </p>
+    </div>
+    <div class="noteBottom d-flex justify-content-between">
+
+      <p class="noteDeadline fw-light" [class.checked]="note.done" [class]="isDeadlineExpired(note.deadline)">
+        {{ note.deadline | date:"dd/MMM/yyyy"}}
+      </p>
+
+      <div class="noteButtonWrap d-flex justify-content-end">
+        <button type="button" class="btn me-1" (click)="editNote(note)"><i
+            class="bi bi-pencil-square"></i></button>
+        <button type="button" class="btn" (click)="deteleNote(note._id!)"><i
+            class="bi bi-trash-fill"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
