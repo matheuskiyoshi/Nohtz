@@ -1,10 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotesListComponent } from './components/notes-list/notes-list.component';
+import { authGuard } from 'src/app/core/guards/auth.guard';
+import { NotesCreateComponent } from './components/notes-create/notes-create.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: NotesListComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'new',
+    component: NotesCreateComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'edit/:id',
+    component: NotesCreateComponent,
+    canActivate: [authGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class NotesRoutingModule { }
+export class NotesRoutingModule {}
